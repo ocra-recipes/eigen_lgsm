@@ -188,12 +188,12 @@ typename  LieGroupBase<Quaternion<typename internal::traits<Derived>::Scalar>, D
  LieGroupBase<Quaternion<typename internal::traits<Derived>::Scalar>, Derived>::log(const Scalar precision) const 
 {
   const Scalar n2 = this->get().vec().squaredNorm();
-  const Scalar n = internal::sqrt(n2);
+  const Scalar n = ::sqrt(n2);
 
   if (n < precision) 
     return Algebra((2 / this->get().w()) * this->get().vec());
   else 
-    return Algebra(internal::atan2(2 * n * this->get().w(), this->get().w() * this->get().w() - n2) / n * this->get().vec());  
+    return Algebra(::atan2(2 * n * this->get().w(), this->get().w() * this->get().w() - n2) / n * this->get().vec());  
 }
 
 // adjoint

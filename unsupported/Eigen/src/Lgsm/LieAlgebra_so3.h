@@ -25,7 +25,7 @@ template<typename Scalar> EIGEN_STRONG_INLINE Scalar ei_lie_algebra_so3_derivati
   if ( n2 < precision )
     return ( (Scalar(-1.)+(Scalar(1.)/Scalar(15.)+(Scalar(-1.)/Scalar(560.)+n2/Scalar(37800.))*n2)*n2)/Scalar(12.) );
   else
-    return ( Scalar(2.)*( Scalar(0.5)*(n2-Scalar(2.)+Scalar(2.)*cos_n )/(n2*n2) ) - (n - internal::sin(n))/(n2*n) );
+    return ( Scalar(2.)*( Scalar(0.5)*(n2-Scalar(2.)+Scalar(2.)*cos_n )/(n2*n2) ) - (n - ::sin(n))/(n2*n) );
 }
 
 template<typename Scalar> inline Scalar ei_lie_algebra_so3_derivative_f3(Scalar n, Scalar n2, Scalar sin_n, Scalar precision){
@@ -170,9 +170,9 @@ inline typename LieAlgebraBase<Matrix<typename internal::traits<Derived>::Scalar
   }
   else
   {
-    const Scalar n = internal::sqrt(n2);
-    const Scalar w = internal::cos(n * Scalar(0.5));
-    return Group(w, internal::sin(n * Scalar(0.5)) / n * *this);
+    const Scalar n = ::sqrt(n2);
+    const Scalar w = ::cos(n * Scalar(0.5));
+    return Group(w, ::sin(n * Scalar(0.5)) / n * *this);
   }
 }
 
@@ -183,9 +183,9 @@ inline typename LieAlgebraBase<Matrix<typename internal::traits<Derived>::Scalar
                                                                                                  Scalar precision2) const 
 {
   Scalar n2 = this->squaredNorm();
-  Scalar n = internal::sqrt(n2);
-  Scalar sin_n = internal::sin(n);
-  Scalar cos_n = internal::cos(n);
+  Scalar n = ::sqrt(n2);
+  Scalar sin_n = ::sin(n);
+  Scalar cos_n = ::cos(n);
 
   Scalar f2 = ei_lie_algebra_so3_derivative_f2(n, n2, cos_n, precision);
   Scalar f3 = ei_lie_algebra_so3_derivative_f3(n, n2, sin_n, precision2);
@@ -217,9 +217,9 @@ inline typename LieAlgebraBase<Matrix<typename internal::traits<Derived>::Scalar
                                                                                                  Scalar precision2) const
 {
   Scalar n2 = this->squaredNorm();
-  Scalar n = internal::sqrt(n2);
-  Scalar cos_n = internal::cos(n);
-  Scalar sin_n = internal::sin(n);
+  Scalar n = ::sqrt(n2);
+  Scalar cos_n = ::cos(n);
+  Scalar sin_n = ::sin(n);
 
   Scalar f2 = ei_lie_algebra_so3_derivative_f2(n, n2, cos_n, precision);
   Scalar f3 = ei_lie_algebra_so3_derivative_f3(n, n2, sin_n, precision2);

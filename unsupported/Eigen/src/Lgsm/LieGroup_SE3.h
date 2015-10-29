@@ -213,10 +213,10 @@ typename LieGroupBase<Array<typename internal::traits<Derived>::Scalar, 7, 1 >, 
   if(n2 < precision)
     return Algebra(ang, this->getR3Element());
   else{
-    const Scalar n = internal::sqrt(n2); 
-    const Scalar sn = internal::sin(n);
+    const Scalar n = ::sqrt(n2); 
+    const Scalar sn = ::sin(n);
 
-    Scalar val = (Scalar(2.0) * sn - n * (Scalar(1.0) + internal::cos(n))) / (Scalar(2.0) *n2 * sn);
+    Scalar val = (Scalar(2.0) * sn - n * (Scalar(1.0) + ::cos(n))) / (Scalar(2.0) *n2 * sn);
 
     Vector3 lin = -0.5*ang.cross(this->getR3Element());
     lin += (Scalar(1.0) - val * n2 ) * this->getR3Element();
