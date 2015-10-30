@@ -1,6 +1,17 @@
-FILE(GLOB Eigen_Lgsm_SRCS "*.h")
+FILE(GLOB eigen_lgsm_headers "*.h")
+FILE(GLOB eigen_lgsm_util_headers "util/*.h")
+
+if(NOT INCLUDE_INSTALL_DIR)
+	message(FATAL_ERROR "INCLUDE_INSTALL_DIR is empty")
+endif()
+
+
+install(FILES
+  ${eigen_lgsm_headers}
+  DESTINATION ${INCLUDE_INSTALL_DIR}/Eigen/src/Lgsm COMPONENT Devel
+  )
 
 INSTALL(FILES
-  ${Eigen_Lgsm_SRCS}
-  DESTINATION ${INSTALL_INCLUDE_DIR}/unsupported/Eigen/src/Lgsm COMPONENT Devel
+  ${eigen_lgsm_util_headers}
+  DESTINATION ${INCLUDE_INSTALL_DIR}/Eigen/src/Lgsm/util COMPONENT Devel
   )

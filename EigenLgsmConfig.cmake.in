@@ -1,9 +1,9 @@
+@PACKAGE_INIT@
+
 # - Config file for the EigenLgsm package
 # It defines the following variables
-#  FOOBAR_INCLUDE_DIRS - include directories for FooBar
-#  FOOBAR_LIBRARIES    - libraries to link against
-#  FOOBAR_EXECUTABLE   - the bar executable
+#  EigenLgsm_INCLUDE_DIRS - include directories for EigenLgsm
  
-# Compute paths
-get_filename_component(EigenLgsm_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
-set(EigenLgsm_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
+
+set_and_check(@PROJECT_NAME@_INCLUDE_DIR "@PACKAGE_INCLUDE_INSTALL_DIR@")
+set(@PROJECT_NAME@_INCLUDE_DIRS @PROJECT_NAME@_INCLUDE_DIR)
