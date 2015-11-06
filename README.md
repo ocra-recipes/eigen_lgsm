@@ -17,7 +17,7 @@ find_package(EigenLgsm REQUIRED)
 
 include_directories(
 	${Eigen_INCLUDE_DIRS}
-	${EigenLgsm_INCLUDE_DIR}
+	${EigenLgsm_INCLUDE_DIRS}
 )
 ```
 
