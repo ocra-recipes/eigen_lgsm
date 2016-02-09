@@ -7,10 +7,9 @@
 
 # find_package(Eigen REQUIRED)
 find_package(PkgConfig)
-pkg_search_module(Eigen3 REQUIRED eigen3)
-set(Eigen_INCLUDE_DIR ${EIGEN_INCLUDE_DIR})
+pkg_search_module(EIGEN3 REQUIRED eigen3)
 
-set_and_check(@PROJECT_NAME@_INCLUDE_DIR "@PACKAGE_INCLUDE_INSTALL_DIR@")
-set(@PROJECT_NAME@_INCLUDE_DIRS "${@PROJECT_NAME@_INCLUDE_DIR}" "${Eigen_INCLUDE_DIR}")
+set_and_check(@PROJECT_NAME@_INCLUDE_DIR "@PACKAGE_INCLUDE_INSTALL_DIR@" "${EIGEN3_INCLUDE_DIRS}")
+set(@PROJECT_NAME@_INCLUDE_DIRS "${@PROJECT_NAME@_INCLUDE_DIR}")
 
-message(STATUS "Eigen include dirs: ${Eigen_INCLUDE_DIR}")
+message(STATUS "Eigen (+lgsm) include dirs: ${Eigen_INCLUDE_DIR}")
