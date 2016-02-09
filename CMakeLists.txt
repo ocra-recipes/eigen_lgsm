@@ -7,7 +7,7 @@ set(${PROJECT_NAME}_MINOR_VERSION 2)
 set(${PROJECT_NAME}_PATCH_VERSION 0)
 set(${PROJECT_NAME}_VERSION
   ${${PROJECT_NAME}_MAJOR_VERSION}.${${PROJECT_NAME}_MINOR_VERSION}.${${PROJECT_NAME}_PATCH_VERSION})
-  
+
 option(BUILD_TESTS "Build tests"
        false)
 
@@ -17,7 +17,7 @@ endif()
 
 include(CMakePackageConfigHelpers)
 export(PACKAGE ${PROJECT_NAME})
- 
+
 set(INCLUDE_INSTALL_DIR "include/eigen_lgsm")
 set(CMAKE_CONFIG_DEST "share/cmake/${PROJECT_NAME}")
 
@@ -26,7 +26,7 @@ add_subdirectory(unsupported)
 
 include(CMakePackageConfigHelpers)
 
-configure_package_config_file(                         
+configure_package_config_file(
        ${CMAKE_SOURCE_DIR}/EigenLgsmConfig.cmake.in
        ${CMAKE_BINARY_DIR}/EigenLgsmConfig.cmake
        INSTALL_DESTINATION ${CMAKE_CONFIG_DEST}
@@ -38,4 +38,5 @@ configure_file(EigenLgsmConfigVersion.cmake.in
 install(FILES
  "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
  "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+ "${PROJECT_SOURCE_DIR}/test/cmake/FindEigen.cmake"
  DESTINATION ${CMAKE_CONFIG_DEST})

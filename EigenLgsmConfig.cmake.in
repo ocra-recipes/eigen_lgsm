@@ -3,7 +3,8 @@
 # - Config file for the EigenLgsm package
 # It defines the following variables
 #  EigenLgsm_INCLUDE_DIRS - include directories for EigenLgsm
- 
+
+find_package(Eigen REQUIRED)
 
 set_and_check(@PROJECT_NAME@_INCLUDE_DIR "@PACKAGE_INCLUDE_INSTALL_DIR@")
 set(@PROJECT_NAME@_INCLUDE_DIRS ${@PROJECT_NAME@_INCLUDE_DIR})
