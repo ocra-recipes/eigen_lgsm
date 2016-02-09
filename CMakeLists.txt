@@ -38,5 +38,9 @@ configure_file(EigenLgsmConfigVersion.cmake.in
 install(FILES
  "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
  "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
- "${PROJECT_SOURCE_DIR}/test/cmake/FindEigen.cmake"
  DESTINATION ${CMAKE_CONFIG_DEST})
+
+install(FILES
+ "${PROJECT_SOURCE_DIR}/test/cmake/FindEigen.cmake"
+DESTINATION "share/cmake/Eigen")
+
