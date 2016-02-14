@@ -9,10 +9,11 @@
 find_package(PkgConfig)
 pkg_search_module(EIGEN3 REQUIED eigen3)
 
-# osx exception (pkg_config return -Iinclude/eigen3 which is wrong)
-if( NOT EXISTS ${EIGEN3_INCLUDE_DIRS} )
-  find_package(Eigen3 REQUIRED)
-  set(EIGEN3_INCLUDE_DIRS ${EIGEN3_INCLUDE_DIR})
+# osx exception (brew gives -Iinclude/eigen)
+if(NOT EXISTS ${EIGEN3_INCLUDE_DIRS})
+	execute_process(OUTPUT_VARIABLE eigen_info COMMAND brew info eigen)
+	string(REGEX MATCH "[^\n]*Cellar[^ ]*" eigen_dir ${eigen_info})
+	set(EIGEN3_INCLUDE_DIRS ${eigen_dir}/include/eigen3)
 endif()
 
 set_and_check(EIGEN3_INCLUDE_DIR "${EIGEN3_INCLUDE_DIRS}")
