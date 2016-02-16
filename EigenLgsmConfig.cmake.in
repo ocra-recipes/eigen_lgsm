@@ -5,17 +5,20 @@
 #  EigenLgsm_INCLUDE_DIRS - include directories for EigenLgsm
 
 
-# find_package(Eigen REQUIRED)
-find_package(PkgConfig)
-pkg_search_module(EIGEN3 REQUIED eigen3)
+find_package(Eigen QUIET)
+if(Eigen_FOUND)
+	set(EIGEN3_INCLUDE_DIRS ${Eigen_INCLUDE_DIRS})
+else()
+	find_package(PkgConfig)
+	pkg_search_module(EIGEN3 REQUIED eigen3)
 
-# osx exception (brew gives -Iinclude/eigen)
-if(NOT EXISTS ${EIGEN3_INCLUDE_DIRS})
-	execute_process(OUTPUT_VARIABLE eigen_info COMMAND brew info eigen)
-	string(REGEX MATCH "[^\n]*Cellar[^ ]*" eigen_dir ${eigen_info})
-	set(EIGEN3_INCLUDE_DIRS ${eigen_dir}/include/eigen3)
+	# osx exception (brew gives -Iinclude/eigen)
+	if(NOT EXISTS ${EIGEN3_INCLUDE_DIRS})
+		execute_process(OUTPUT_VARIABLE eigen_info COMMAND brew info eigen)
+		string(REGEX MATCH "[^\n]*Cellar[^ ]*" eigen_dir ${eigen_info})
+		set(EIGEN3_INCLUDE_DIRS ${eigen_dir}/include/eigen3)
+	endif()
 endif()
-
 set_and_check(EIGEN3_INCLUDE_DIR "${EIGEN3_INCLUDE_DIRS}")
 set_and_check(@PROJECT_NAME@_INCLUDE_DIR "@PACKAGE_INCLUDE_INSTALL_DIR@")
 
