@@ -44,3 +44,14 @@ install(FILES
  "${PROJECT_SOURCE_DIR}/test/cmake/FindEigen.cmake"
 DESTINATION "share/cmake/Eigen")
 
+# add a target to generate API documentation with Doxygen
+if(GENERATE_DOCUMENTATION)
+    find_package(Doxygen REQUIRED)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+    add_custom_target(
+        doc
+        ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Generating API documentation with Doxygen" VERBATIM
+    )
+endif(GENERATE_DOCUMENTATION)
