@@ -5,9 +5,18 @@
 ```bash
 cd eigen_lgsm
 mkdir build && cd build
-cmake .. 
-sudo make install 
+cmake ..
+sudo make install
 ```
+To build the documentation, execute `cmake` with the following flag:
+```bash
+cmake .. -DGENERATE_DOCUMENTATION=ON
+```
+and run
+```bash
+make doc
+```
+All documentation is written to `./doc`. The homepage is at `./doc/html/index.html`.
 
 ### CMake usage
 
