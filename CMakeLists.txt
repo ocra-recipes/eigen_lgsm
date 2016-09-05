@@ -9,7 +9,7 @@ set(${PROJECT_NAME}_VERSION
   ${${PROJECT_NAME}_MAJOR_VERSION}.${${PROJECT_NAME}_MINOR_VERSION}.${${PROJECT_NAME}_PATCH_VERSION})
 
 option(BUILD_TESTS "Build tests"
-       false)
+true)
 
 if(BUILD_TESTS)
   add_subdirectory(test)

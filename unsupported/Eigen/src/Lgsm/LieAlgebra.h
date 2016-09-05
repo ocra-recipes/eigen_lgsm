@@ -36,6 +36,7 @@ protected:
   /** The inherited class */
   typedef MatrixBase<Derived> Base;
 public:  
+
   // inherit MatrixBase interface
   EIGEN_DENSE_PUBLIC_INTERFACE(LieAlgebraBase)
   // inherit operator=
@@ -53,8 +54,9 @@ public:
   typedef LieAlgebraDual<BaseType> AlgebraDual;
   /** The type of the associated Lie Group */
   typedef typename Derived::LieGroup Group;
-
-
+  
+  typedef typename Base::PointerType PointerType;
+  typedef typename internal::traits<Derived> NestedExpression;
   /** Lie Bracket*/
   template<class OtherDerived> inline PlainObject bracket(const LieAlgebraBase<BaseType, OtherDerived>& a) const;
   /** Adjoint representation of the Lie Algebra*/
@@ -101,6 +103,8 @@ protected:
   /** The inherited class */
   typedef MatrixBase<Derived>  Base;
 public:
+    typedef typename Base::PointerType PointerType;
+    
   // inherit MatrixBase interface
   EIGEN_DENSE_PUBLIC_INTERFACE(LieAlgebraDualBase)
   // inherit operator=
@@ -108,7 +112,7 @@ public:
   // accessor needed for MatrixBase inheritance
   LIE_INHERIT_MATRIX_BASE(A::RowsAtCompileTime, A::ColsAtCompileTime)
 
-  
+ typedef Derived NestedExpression;
   /** Default assignement operator */
   EIGEN_STRONG_INLINE LieAlgebraDualBase& operator=(const LieAlgebraDualBase& other) {
     this->get() = other.get();
@@ -170,11 +174,14 @@ protected:
   /** Inherited class */
   typedef LieAlgebraBase<A, LieAlgebra<A> > Base;
 public:
+    typedef typename A::PointerType PointerType;
+    
   // inherit MatrixBase operator
   EIGEN_DENSE_PUBLIC_INTERFACE(LieAlgebra)
   // inherit assignement operator
   EIGEN_INHERIT_ASSIGNMENT_OPERATORS(LieAlgebra)
 
+  typedef typename internal::traits<LieAlgebra<A> > NestedExpression;
   /** The stored coefficients */
   typedef typename internal::traits<LieAlgebra<A> >::Coefficients Coefficients;
 
@@ -218,6 +225,7 @@ protected:
   typedef LieAlgebraDualBase<A, LieAlgebraDual<A> > Base;
   /** Inherited class */
 public:
+    
   // inherit MatrixBase operator
   EIGEN_DENSE_PUBLIC_INTERFACE(LieAlgebraDual)
   // inherit assignement operator
@@ -225,7 +233,7 @@ public:
 
   /** The stored coefficients */
   typedef typename internal::traits<LieAlgebraDual<A> >::Coefficients Coefficients;
-
+  typedef typename Base::PointerType PointerType;
   /** Copy constructor : do nothing */
   inline LieAlgebraDual(const LieAlgebraDual&);
 
@@ -281,11 +289,17 @@ class Map<LieAlgebra<A>, MapOptions, StrideType> : public LieAlgebraBase<A, Map<
   public:
     // inherit MatrixBase operator
     EIGEN_DENSE_PUBLIC_INTERFACE(Map)
-      // inherit assignement operator
-      EIGEN_INHERIT_ASSIGNMENT_OPERATORS(Map)
-
-      /** The stored coefficients */
-      typedef typename internal::traits<Map<LieAlgebra<A>, MapOptions, StrideType> >::Coefficients Coefficients;
+    // inherit assignement operator
+    EIGEN_INHERIT_ASSIGNMENT_OPERATORS(Map)
+    
+          typedef typename internal::conditional<
+                            bool(internal::is_lvalue<A>::value),
+                             Scalar *,
+                            const Scalar *>::type
+                        PointerType;
+    typedef typename internal::traits<Map<LieAlgebra<A>, MapOptions, StrideType> > NestedExpression;                    
+    /** The stored coefficients */
+    typedef typename internal::traits<Map<LieAlgebra<A>, MapOptions, StrideType> >::Coefficients Coefficients;
 
     /** Maps a class A */
     Map(const A& a) : m_coeffs(a.data()) {};
@@ -310,10 +324,12 @@ class Map<const LieAlgebra<A>, MapOptions, StrideType> : public LieAlgebraBase<A
     /** Inherited class */
     typedef LieAlgebraBase<A, Map<const LieAlgebra<A>, MapOptions, StrideType> > Base;
   public:
+    typedef typename Base::PointerType PointerType;
     // inherit MatrixBase operator
     EIGEN_DENSE_PUBLIC_INTERFACE(Map)
 
       /** The stored coefficients */
+      typedef typename internal::traits<Map<const LieAlgebra<A>, MapOptions, StrideType> > NestedExpression;
       typedef typename internal::traits<Map<const LieAlgebra<A>, MapOptions, StrideType> >::Coefficients Coefficients;
 
     /** Maps a class A */
@@ -372,6 +388,7 @@ class Map<LieAlgebraDual<A>, MapOptions, StrideType> : public LieAlgebraDualBase
     /** Inherited class */
     typedef LieAlgebraDualBase<A, Map<LieAlgebraDual<A>, MapOptions, StrideType> > Base;
   public:
+    typedef typename Base::PointerType PointerType;
     // inherit MatrixBase operator
     EIGEN_DENSE_PUBLIC_INTERFACE(Map)
       // inherit assignement operator
@@ -379,6 +396,7 @@ class Map<LieAlgebraDual<A>, MapOptions, StrideType> : public LieAlgebraDualBase
 
       /** The stored coefficients */
       typedef typename internal::traits<Map<LieAlgebraDual<A>, MapOptions, StrideType> >::Coefficients Coefficients;
+      typedef typename internal::traits<Map<LieAlgebraDual<A>, MapOptions, StrideType> > NestedExpression;
 
     /** Maps a class A */
     Map(const A& a) : m_coeffs(a) {};
@@ -403,11 +421,13 @@ class Map<const LieAlgebraDual<A>, MapOptions, StrideType> : public LieAlgebraDu
     /** Inherited class */
     typedef LieAlgebraDualBase<A, Map<const LieAlgebraDual<A>, MapOptions, StrideType> > Base;
   public:
+      typedef typename Base::PointerType PointerType;
     // inherit MatrixBase operator
     EIGEN_DENSE_PUBLIC_INTERFACE(Map)
 
       /** The stored coefficients */
       typedef typename internal::traits<Map<const LieAlgebraDual<A>, MapOptions, StrideType> >::Coefficients Coefficients;
+      typedef typename internal::traits<Map<const LieAlgebraDual<A>, MapOptions, StrideType> > NestedExpression;
 
     /** Maps a class A */
     Map(const A& a) : m_coeffs(a) {};

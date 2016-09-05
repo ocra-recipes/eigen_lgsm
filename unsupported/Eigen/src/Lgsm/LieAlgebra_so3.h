@@ -70,6 +70,8 @@ public:
   //EIGEN_INHERIT_ASSIGNMENT_OPERATORS(LieAlgebraBase)
   // accessor needed for MatrixBase inheritance
   LIE_INHERIT_MATRIX_BASE(3, 1)
+  
+  typedef typename internal::traits<Derived>::NestedExpression NestedExpression;
 
   /** The wrapped class */
   typedef Matrix<Scalar, 3, 1> BaseType;
@@ -332,6 +334,8 @@ public:
   EIGEN_DENSE_PUBLIC_INTERFACE(LieAlgebra)
   // inherit assignement operator
   EIGEN_INHERIT_ASSIGNMENT_OPERATORS(LieAlgebra)
+  
+  typedef typename internal::traits<LieAlgebra<Matrix<Scalar, 3, 1> > >::NestedExpression NestedExpression;
 
   /** The stored coefficients */
   typedef typename internal::traits<LieAlgebra<Matrix<Scalar, 3, 1> > >::Coefficients Coefficients;
