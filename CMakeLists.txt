@@ -40,10 +40,6 @@ install(FILES
  "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
  DESTINATION ${CMAKE_CONFIG_DEST})
 
-install(FILES
- "${PROJECT_SOURCE_DIR}/test/cmake/FindEigen.cmake"
-DESTINATION "share/cmake/Eigen")
-
 # add a target to generate API documentation with Doxygen
 if(GENERATE_DOCUMENTATION)
     find_package(Doxygen REQUIRED)
